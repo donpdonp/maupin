@@ -1,19 +1,13 @@
 use crate::compound::*;
-use hyper::Client;
-use hyper_tls::HttpsConnector;
+use reqwest;
 
-#[tokio::main]
-pub async fn update(
-) -> Result<hyper::Response<hyper::Body>, Box<dyn std::error::Error + Send + Sync>> {
-    let https = HttpsConnector::new();
-    let client = Client::builder().build::<_, hyper::Body>(https);
+pub fn update() -> Result<String, reqwest::Error> {
+    println!("{}", ACCOUNTS_URL);
+    use reqwest::blocking::Client;
+    let client = Client::new();
+    let resp = client.get(ACCOUNTS_URL).send()?;
 
-    // Parse an `http::Uri`...
-    let uri = ACCOUNTS_URL.parse()?;
-    println!("{}", uri);
+    let accounts = serde_json::from_str(&resp.text()?).unwrap();
 
-    // Await the response...
-    let resp = client.get(uri).await?;
-
-    Ok(resp)
+    Ok(accounts)
 }
