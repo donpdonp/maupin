@@ -7,7 +7,7 @@ pub fn update() -> Result<compound::Response, reqwest::Error> {
     let url = reqwest::Url::parse(compound::ACCOUNTS_URL).unwrap();
     println!("{}", url);
     let accounts_options = compound::AccountOptions {
-            page_size: 15,
+        page_size: 15,
         max_health: compound::Value {
             value: "1.1".to_string(),
         },

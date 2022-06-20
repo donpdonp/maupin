@@ -18,7 +18,7 @@ pub struct Account {
 #[derive(Serialize, Deserialize)]
 pub struct AccountOptions {
     pub max_health: Value,
-    pub page_size: i32
+    pub page_size: i32,
 }
 
 #[derive(Serialize, Deserialize)]
