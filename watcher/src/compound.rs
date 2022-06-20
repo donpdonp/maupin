@@ -4,7 +4,7 @@ pub static ACCOUNTS_URL: &str = "https://api.compound.finance/api/v2/account";
 
 #[derive(Serialize, Deserialize)]
 pub struct Response {
-    pub accounts: Vec<Account>
+    pub accounts: Vec<Account>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -16,6 +16,12 @@ pub struct Account {
 }
 
 #[derive(Serialize, Deserialize)]
+pub struct AccountOptions {
+    pub max_health: Value,
+    pub page_size: i32
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct Value {
-    pub value: String
+    pub value: String,
 }

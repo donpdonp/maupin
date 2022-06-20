@@ -2,10 +2,18 @@ use crate::compound;
 use reqwest;
 
 pub fn update() -> Result<compound::Response, reqwest::Error> {
-    println!("{}", compound::ACCOUNTS_URL);
     use reqwest::blocking::Client;
     let client = Client::new();
-    let resp = client.get(compound::ACCOUNTS_URL).send()?;
+    let url = reqwest::Url::parse(compound::ACCOUNTS_URL).unwrap();
+    println!("{}", url);
+    let accounts_options = compound::AccountOptions {
+            page_size: 15,
+        max_health: compound::Value {
+            value: "1.1".to_string(),
+        },
+    };
+    let options_json = serde_json::to_string(&accounts_options).unwrap();
+    let resp = client.post(url).body(options_json).send()?;
 
     let accounts: compound::Response = serde_json::from_str(&resp.text()?).unwrap();
 
