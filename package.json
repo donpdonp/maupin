@@ -4,5 +4,8 @@
 		"prettier": "^2.7.1",
 		"prettier-plugin-solidity": "^1.0.0-beta.19",
 		"truffle": "*"
+	},
+	"dependencies": {
+		"ganache": "^7.3.1"
 	}
 }
