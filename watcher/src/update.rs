@@ -3,7 +3,8 @@ use hyper::Client;
 use hyper_tls::HttpsConnector;
 
 #[tokio::main]
-pub async fn update() -> Result<hyper::Response<hyper::Body>, Box<dyn std::error::Error + Send + Sync>> {
+pub async fn update(
+) -> Result<hyper::Response<hyper::Body>, Box<dyn std::error::Error + Send + Sync>> {
     let https = HttpsConnector::new();
     let client = Client::builder().build::<_, hyper::Body>(https);
 
@@ -13,7 +14,6 @@ pub async fn update() -> Result<hyper::Response<hyper::Body>, Box<dyn std::error
 
     // Await the response...
     let resp = client.get(uri).await?;
-    
-    
+
     Ok(resp)
 }
