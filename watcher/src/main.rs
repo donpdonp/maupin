@@ -3,7 +3,7 @@ use watcher::*;
 fn main() {
     println!("Hello, world!");
     match update::update() {
-        Ok(body) => println!("{:?}", body),
+        Ok(response) => println!("{}", response.accounts.len()),
         Err(e) => println!("{}", e),
     }
 }
