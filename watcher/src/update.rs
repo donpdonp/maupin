@@ -1,4 +1,5 @@
 use crate::compound;
+use redis;
 use reqwest;
 
 pub fn update() -> Result<compound::Response, reqwest::Error> {
@@ -18,4 +19,8 @@ pub fn update() -> Result<compound::Response, reqwest::Error> {
     let accounts: compound::Response = serde_json::from_str(&resp.text()?).unwrap();
 
     Ok(accounts)
+}
+
+pub fn merge(redis: redis::Client, response: compound::Response) {
+    println!("{}", response.accounts.len());
 }
